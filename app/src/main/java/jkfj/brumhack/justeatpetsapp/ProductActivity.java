@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
+
+import models.Product;
 
 /**
  * Created by kylehodgetts on 25/10/2015.
@@ -29,6 +33,7 @@ public class ProductActivity extends Activity{
 
         final Intent i = getIntent();
         txtProductName.setText(i.getStringExtra(ProductsActivity.PRODUCT + "name"));
+        Picasso.with(this).load(i.getStringExtra(ProductsActivity.PRODUCT + "image")).into(imgImage);
         DecimalFormat df = new DecimalFormat("##.##");
         String price = df.format(i.getDoubleExtra(ProductsActivity.PRODUCT + "price", 0.00));
         txtPrice.setText("£"+price);

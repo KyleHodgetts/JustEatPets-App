@@ -1,7 +1,6 @@
 package jkfj.brumhack.justeatpetsapp;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -126,6 +125,7 @@ public class RecognitionActivity extends Activity {
      */
     private void filterTagsToGetPet(RecognitionResult result) {
         String animalFilter = "dog"; //everyone likes dogs, not sure of behaviour if I make this blank
+        Boolean foundMatch = false;
 
         //if given result is ok, filter tags to get animal
         if (result != null && result.getStatusCode() == RecognitionResult.StatusCode.OK) {
@@ -137,35 +137,41 @@ public class RecognitionActivity extends Activity {
                 switch (tagName) {
                     case "cat":
                         animalFilter = "Cat";
+                        foundMatch = true;
                         break label;
                     case "dog":
                         animalFilter = "Dog";
+                        foundMatch = true;
                         break label;
                     case "fish":
                         animalFilter = "Fish";
+                        foundMatch = true;
                         break label;
                 }
             }
 
-            toast(animalFilter);
+            if (foundMatch) {
+                //toast
+                Toast toast = Toast.makeText(getApplicationContext(), animalFilter, Toast.LENGTH_SHORT);
+                toast.show();
 
-            //send intent to the food api business
-            Intent i = new Intent(RecognitionActivity.this, ProductsActivity.class);
-            i.putExtra(FILTER, animalFilter.toLowerCase());
-            startActivity(i);
-            this.finish();
+                //send intent to the food api business
+                Intent i = new Intent(RecognitionActivity.this, ProductsActivity.class);
+                i.putExtra(FILTER, animalFilter.toLowerCase());
+                startActivity(i);
+                this.finish();
+            } else {
+                final String text = "No animal found: \"" + result.getTags().get(0).getName() + "\".";
+                //because we cannot run UI stuff in background thread
+                runOnUiThread(new Thread() {
+                                  public void run() {
+                                      Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+                                      toast.show();
+                                  }
+                              }
+                );
+                this.finish();
+            }
         }
-    }
-
-    /**
-     * Tells the user what animal was selected, via a toast
-     *
-     * @param text the animal chosen
-     */
-    private void toast(String text) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
     }
 }

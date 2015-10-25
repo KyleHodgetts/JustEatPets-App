@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp">
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_margin="@dimen/smallMargin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cat"/>
+
+    <TextView
+        android:id="@+id/txtProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product name"
+        android:layout_margin="@dimen/standardMargin"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imgProduct" />
+
+    <TextView
+        android:id="@+id/txtProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="€1.20"
+        android:layout_alignBottom="@+id/imgProduct"
+        android:layout_alignStart="@+id/txtProductName" />
+
+
+    <TextView
+        android:id="@+id/txtProductRestaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sainsbury\'s"
+        android:layout_alignTop="@+id/txtProductPrice"
+        android:layout_marginRight="@dimen/standardMargin"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

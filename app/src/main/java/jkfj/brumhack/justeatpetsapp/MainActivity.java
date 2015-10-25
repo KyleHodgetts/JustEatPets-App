@@ -2,23 +2,29 @@ package jkfj.brumhack.justeatpetsapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
+import android.widget.ImageButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button btnShootPet;
-    private Button btnCat;
-    private Button btnDog;
-    private Button btnFish;
+    private ImageButton btnShootPet;
+    private ImageButton btnCat;
+    private ImageButton btnDog;
+    private ImageButton btnFish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnShootPet = (Button) findViewById(R.id.btnShootPet);
-        btnCat = (Button) findViewById(R.id.btnCat);
-        btnDog = (Button) findViewById(R.id.btnDog);
-        btnFish = (Button) findViewById(R.id.btnFish);
+        btnShootPet = (ImageButton) findViewById(R.id.btnShootPets);
+        btnCat = (ImageButton) findViewById(R.id.btnCat);
+        btnDog = (ImageButton) findViewById(R.id.btnDog);
+        btnFish = (ImageButton) findViewById(R.id.btnFish);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

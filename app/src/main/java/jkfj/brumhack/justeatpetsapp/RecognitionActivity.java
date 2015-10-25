@@ -36,10 +36,15 @@ public class RecognitionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognition);
+
         imageView = (ImageView) findViewById(R.id.imageView);
+
         dispatchTakePictureIntent();
     }
 
+    /**
+     * Launches a camera activity for the user to take a photograph
+     */
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -91,10 +96,10 @@ public class RecognitionActivity extends Activity {
      */
     private RecognitionResult recognizeBitmap(Bitmap bitmap) {
         try {
-            // Scale down the image. This step is optional. However, sending large images over the
-            // network is slow and  does not significantly improve recognition performance.
-            Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 480,
-                    480 * bitmap.getHeight() / bitmap.getWidth(), true);
+            // Scale down the image for quicker response over network
+            int pixelsWide = 320;
+            Bitmap scaled = Bitmap.createScaledBitmap(bitmap,
+                    pixelsWide, pixelsWide * bitmap.getHeight() / bitmap.getWidth(), true);
 
             // Compress the image as a JPEG.
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -105,9 +110,10 @@ public class RecognitionActivity extends Activity {
             Log.i(TAG, "Waiting for clarifai");
             return client.recognize(new RecognitionRequest(jpeg)).get(0);
         } catch (ClarifaiException e) {
-            Log.e(TAG, "Clarifai error", e);
+            //Things went wrong. Usually a network failure.
+            Log.e(TAG, "Clarifai error" + e);
             e.printStackTrace();
-            this.finish();
+            this.finish(); //TODO: not make this finish(), deal with the error where recognizeBitmap() is called
             return null;
         }
     }
@@ -140,6 +146,7 @@ public class RecognitionActivity extends Activity {
                         break label;
                 }
             }
+
             toast(animalFilter);
 
             //send intent to the food api business

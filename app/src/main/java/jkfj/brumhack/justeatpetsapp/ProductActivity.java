@@ -38,13 +38,7 @@ public class ProductActivity extends Activity{
         txtPrice = (TextView) findViewById(R.id.txtProductPrice);
         txtRestaurant = (TextView) findViewById(R.id.txtProductRestaurant);
         btnAddToCart = (ImageButton) findViewById(R.id.btnAddToCart);
-        btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShoppingCart.addProduct(txtProductName.getText().toString(), Double.parseDouble(txtPrice.getText().toString()));
-                Toast.makeText(ProductActivity.this, "Product added to basket", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         final Intent i = getIntent();
         txtProductName.setText(i.getStringExtra(ProductsActivity.PRODUCT + "name"));
@@ -53,5 +47,13 @@ public class ProductActivity extends Activity{
         String price = df.format(i.getDoubleExtra(ProductsActivity.PRODUCT + "price", 0.00));
         txtPrice.setText("£"+price);
         txtRestaurant.setText(i.getStringExtra(ProductsActivity.PRODUCT + "restaurant"));
+
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShoppingCart.addProduct(txtProductName.getText().toString(), Double.parseDouble(txtPrice.getText().toString().substring(1)), i.getStringExtra(ProductsActivity.PRODUCT + "image"));
+                Toast.makeText(ProductActivity.this, "Product added to basket", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

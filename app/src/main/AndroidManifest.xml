@@ -20,6 +20,7 @@
         <activity android:name=".ProductsActivity" />
         <activity android:name=".RecognitionActivity" />
         <activity android:name=".ProductActivity" />
+        <activity android:name=".CartActivity" />
     </application>
 
 </manifest>

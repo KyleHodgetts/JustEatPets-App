@@ -1,6 +1,7 @@
 package jkfj.brumhack.justeatpetsapp;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageButton btnLogo;
     private ImageButton btnShootPet;
+    private ImageButton btnShoppingCart;
     private ImageButton btnCat;
     private ImageButton btnDog;
     private ImageButton btnFish;
@@ -23,6 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogo = (ImageButton) findViewById(R.id.btnLogo);
         btnLogo.setOnClickListener(this);
         btnShootPet = (ImageButton) findViewById(R.id.btnShootPets);
+        btnShoppingCart = (ImageButton) findViewById(R.id.btnShoppingCart);
+        btnShoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(i);
+            }
+        });
         btnCat = (ImageButton) findViewById(R.id.btnCat);
         btnCat.setOnClickListener(this);
         btnDog = (ImageButton) findViewById(R.id.btnDog);

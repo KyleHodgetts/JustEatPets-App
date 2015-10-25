@@ -9,8 +9,8 @@ public class ShoppingCart {
     private static ArrayList<CartItem> products = new ArrayList<>();
     private static double totalPrice = 0.0;
 
-    public static void addProduct(String product, double price) {
-        products.add(new CartItem(product, price));
+    public static void addProduct(String product, double price, String url) {
+        products.add(new CartItem(product, price, url));
         calculatePrice();
     }
 

@@ -35,10 +35,11 @@
         android:id="@+id/btnShoppingCart"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="@dimen/standardMargin"
+        android:layout_marginBottom="@dimen/standardMargin"
         android:background="@drawable/shoppingcartbutton"
-        android:layout_below="@+id/btnShootPets"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="121dp" />
+        android:layout_above="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
         android:layout_alignParentBottom="true"

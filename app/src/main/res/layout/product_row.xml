@@ -15,7 +15,6 @@
         android:id="@+id/txtProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product name"
         android:layout_margin="@dimen/standardMargin"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/imgProduct" />
@@ -24,7 +23,6 @@
         android:id="@+id/txtProductPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="€1.20"
         android:layout_alignBottom="@+id/imgProduct"
         android:layout_alignStart="@+id/txtProductName" />
 
@@ -33,7 +31,6 @@
         android:id="@+id/txtProductRestaurant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sainsbury\'s"
         android:layout_alignTop="@+id/txtProductPrice"
         android:layout_marginRight="@dimen/standardMargin"
         android:layout_alignParentEnd="true" />

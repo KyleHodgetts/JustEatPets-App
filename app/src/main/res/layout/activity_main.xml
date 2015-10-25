@@ -19,7 +19,8 @@
         android:background="@drawable/shootpets"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="startShootPetsActivity" />
 
     <RelativeLayout
         android:layout_alignParentBottom="true"

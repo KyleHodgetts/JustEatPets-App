@@ -1,9 +1,8 @@
 package jkfj.brumhack.justeatpetsapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -45,6 +44,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(pressed.getId() == R.id.btnFish) {
             i.putExtra(FILTER, "fish");
         }
+        startActivity(i);
+    }
+
+    public void startShootPetsActivity(View view) {
+        Intent i = new Intent(MainActivity.this, RecognitionActivity.class);
+        i.putExtra(FILTER, "#nofilter");
         startActivity(i);
     }
 }

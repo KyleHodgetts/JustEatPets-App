@@ -52,7 +52,12 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
         Picasso.with(getContext()).load(product.getPhotoURL()).into(productImage);
 
         productName = (TextView) productRow.findViewById(R.id.txtProductName);
-        productName.setText(product.getName());
+
+        if (product.getName().length() > 30) {
+            productName.setText(product.getName().substring(0, 30) + "...");
+        } else {
+            productName.setText(product.getName());
+        }
 
         productPrice = (TextView) productRow.findViewById(R.id.txtProductPrice);
         productPrice.setText("£" + Double.toString(product.getPrice()));

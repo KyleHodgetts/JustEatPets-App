@@ -1,12 +1,15 @@
 package jkfj.brumhack.justeatpetsapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,11 +35,18 @@ public class ProductsActivity extends Activity {
     private ListView listProducts;
     private ProductsAdapter productsAdapter;
     private ArrayList<Product> products;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
+        dialog = new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Loading. Please wait...");
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
         listProducts = (ListView)findViewById(R.id.listProducts);
         listProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,7 +70,6 @@ public class ProductsActivity extends Activity {
             url += "pet/" + filter;
         }
         parseTask.execute(url);
-
     }
 
     private class ParseTask extends AsyncTask<String, Product, Void> {
@@ -112,6 +121,12 @@ public class ProductsActivity extends Activity {
         protected void onProgressUpdate(Product... product) {
             products.add(product[0]);
             productsAdapter.notifyDataSetChanged();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            dialog.hide();
         }
     }
 

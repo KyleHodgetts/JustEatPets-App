@@ -50,7 +50,7 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
         productName.setText(product.getName());
 
         productPrice = (TextView) productRow.findViewById(R.id.txtProductPrice);
-        productPrice.setText(Double.toString(product.getPrice()));
+        productPrice.setText("£" + Double.toString(product.getPrice()));
 
         productRestaurant = (TextView) productRow.findViewById(R.id.txtProductRestaurant);
         RestaurantParseTask restaurantParseTask = new RestaurantParseTask();

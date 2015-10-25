@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clarifai.api.ClarifaiClient;
@@ -30,22 +29,20 @@ public class RecognitionActivity extends Activity {
 
     // IMPORTANT NOTE: you should replace these keys with your own App ID and secret.
     // These can be obtained at https://developer.clarifai.com/applications
-    private static final String APP_ID = credentials.APP_ID;
-    private static final String APP_SECRET = credentials.APP_SECRET;
+    private static final String APP_ID = Credentials.APP_ID;
+    private static final String APP_SECRET = Credentials.APP_SECRET;
     //shouldn't really commit these. Oops
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private final ClarifaiClient client = new ClarifaiClient(APP_ID, APP_SECRET);
     private ImageView imageView;
-    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognition);
         imageView = (ImageView) findViewById(R.id.imageView);
-        textView = (TextView) findViewById(R.id.textView);
         dispatchTakePictureIntent();
     }
 
@@ -56,14 +53,28 @@ public class RecognitionActivity extends Activity {
         }
     }
 
+    /**
+     * Receives the image from the photo activity, and performs all relevant tasks
+     * @param requestCode something
+     * @param resultCode something else
+     * @param data the image data, within an intent
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            //get the taken photo as a bitmap
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
             if (bitmap != null) {
+
+                //set the image view with the picture that shows whilst the image is being processed.
+//                try {
+//                    Bitmap scaled = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight() * bitmap.getHeight() / bitmap.getWidth(), true);
+//                }
+//                catch (Exception e) {
+//                    Log.i(TAG, e.getMessage());
+//                }
                 imageView.setImageBitmap(bitmap);
-                textView.setText("Recognizing...");
 
                 // Run recognition on a background thread since it makes a network call.
                 new AsyncTask<Bitmap, Void, RecognitionResult>() {
@@ -78,8 +89,13 @@ public class RecognitionActivity extends Activity {
                     }
                 }.execute(bitmap);
             } else {
-                textView.setText("Unable to load selected image.");
+                Log.i(TAG, "Unable to load image");
+                this.finish();
             }
+        }
+
+        else {
+            this.finish();
         }
     }
 
@@ -102,6 +118,7 @@ public class RecognitionActivity extends Activity {
             return client.recognize(new RecognitionRequest(jpeg)).get(0);
         } catch (ClarifaiException e) {
             Log.e(TAG, "Clarifai error", e);
+            this.finish();
             return null;
         }
     }
@@ -121,25 +138,26 @@ public class RecognitionActivity extends Activity {
                 //gets first tag that matches
                 String tagName = tag.getName();
                 if (tagName.equals("cat")) {
-                    animalFilter = "cat";
+                    animalFilter = "Cat";
                     break;
                 } else if (tagName.equals("dog")) {
-                    animalFilter = "dog";
+                    animalFilter = "Dog";
                     break;
                 } else if (tagName.equals("fish")) {
-                    animalFilter = "fish";
+                    animalFilter = "Fish";
                     break;
                 }
             }
 
-            Log.i(TAG, "Animal filter is : " + animalFilter);
+//            Log.i(TAG, "Animal filter is : " + animalFilter);
 
             toastAnimalFilter(animalFilter);
 
             //send intent to the food api business
             Intent i = new Intent(RecognitionActivity.this, ProductsActivity.class);
-            i.putExtra(FILTER, animalFilter);
+            i.putExtra(FILTER, animalFilter.toLowerCase());
             startActivity(i);
+            this.finish();
         }
     }
 

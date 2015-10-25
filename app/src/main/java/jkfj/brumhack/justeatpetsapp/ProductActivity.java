@@ -3,14 +3,20 @@ package jkfj.brumhack.justeatpetsapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
+import models.Pet;
 import models.Product;
+import models.ShoppingCart;
 
 /**
  * Created by kylehodgetts on 25/10/2015.
@@ -20,6 +26,7 @@ public class ProductActivity extends Activity{
     private ImageView imgImage;
     private TextView txtPrice;
     private TextView txtRestaurant;
+    private ImageButton btnAddToCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,14 @@ public class ProductActivity extends Activity{
         imgImage = (ImageView) findViewById(R.id.imgProduct);
         txtPrice = (TextView) findViewById(R.id.txtProductPrice);
         txtRestaurant = (TextView) findViewById(R.id.txtProductRestaurant);
+        btnAddToCart = (ImageButton) findViewById(R.id.btnAddToCart);
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShoppingCart.addProduct(txtProductName.getText().toString(), Double.parseDouble(txtPrice.getText().toString()));
+                Toast.makeText(ProductActivity.this, "Product added to basket", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         final Intent i = getIntent();
         txtProductName.setText(i.getStringExtra(ProductsActivity.PRODUCT + "name"));

@@ -43,6 +43,10 @@ public class Product {
         return pet;
     }
 
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
     public Restaurant getRestaurant() {
         return restaurant;
     }

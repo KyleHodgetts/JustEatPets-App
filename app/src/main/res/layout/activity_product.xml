@@ -49,18 +49,13 @@
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
-    <RelativeLayout
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></RelativeLayout>
 
     <ImageButton
-        android:layout_width="400dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnAddToCart"
-        android:background="@drawable/shoppingcartbutton"
+        android:background="@drawable/shoppingcart"
         android:layout_below="@+id/layoutProductInfo"
-        android:layout_alignStart="@+id/layoutProductInfo"
-        android:layout_marginTop="51dp" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

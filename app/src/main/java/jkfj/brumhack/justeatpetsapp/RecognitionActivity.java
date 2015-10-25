@@ -30,8 +30,8 @@ public class RecognitionActivity extends Activity {
 
     // IMPORTANT NOTE: you should replace these keys with your own App ID and secret.
     // These can be obtained at https://developer.clarifai.com/applications
-    private static final String APP_ID = credentials.APP_ID;
-    private static final String APP_SECRET = credentials.APP_SECRET;
+    private static final String APP_ID = Credentials.APP_ID;
+    private static final String APP_SECRET = Credentials.APP_SECRET;
     //shouldn't really commit these. Oops
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;

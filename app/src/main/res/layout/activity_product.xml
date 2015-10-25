@@ -8,7 +8,7 @@
         android:id="@+id/layoutProductInfo"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/standardMargin">
 
         <TextView
@@ -52,15 +52,15 @@
     <RelativeLayout
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageButton
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/standardMargin"
-            android:id="@+id/btnAddToCart"
-            android:background="@drawable/shoppingcartbutton"
-            />
-    </RelativeLayout>
+        android:layout_height="wrap_content"></RelativeLayout>
+
+    <ImageButton
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddToCart"
+        android:background="@drawable/shoppingcartbutton"
+        android:layout_below="@+id/layoutProductInfo"
+        android:layout_alignStart="@+id/layoutProductInfo"
+        android:layout_marginTop="51dp" />
 
 </RelativeLayout>

@@ -12,42 +12,42 @@
         android:layout_height="wrap_content"
         android:src="@drawable/logo"/>
 
-    <Button
-        android:id="@+id/btnShootPet"
+    <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/shootPet"
-        android:layout_below="@+id/imgLogo"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="125dp" />
+        android:layout_height="60dp"
+        android:background="@drawable/shootpets"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:layout_alignParentStart="true" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:layout_weight="1"
+        <ImageButton
             android:id="@+id/btnCat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cat"/>
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/cat"/>
 
-        <Button
-            android:layout_weight="1"
+        <ImageButton
             android:id="@+id/btnDog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dog"/>
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/dog"
+            android:text="Dog"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-        <Button
-            android:layout_weight="1"
+        <ImageButton
             android:id="@+id/btnFish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fish"/>
-
-    </LinearLayout>
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/fish"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -1,8 +1,11 @@
 package jkfj.brumhack.justeatpetsapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -24,6 +27,7 @@ import models.Restaurant;
  */
 public class ProductsActivity extends Activity {
     private static final String PRODUCTS_URL = "http://api.justeatpets.com/products/";
+    public static final String PRODUCT = "product ";
 
     private ListView listProducts;
     private ProductsAdapter productsAdapter;
@@ -34,6 +38,17 @@ public class ProductsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
         listProducts = (ListView)findViewById(R.id.listProducts);
+        listProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Product p = (Product) parent.getItemAtPosition(position);
+                Intent i = new Intent(ProductsActivity.this, ProductActivity.class);
+                i.putExtra(PRODUCT + "name", p.getName());
+                i.putExtra(PRODUCT + "price", p.getPrice());
+                i.putExtra(PRODUCT + "restaurant", "Restaurant X");
+                startActivity(i);
+            }
+        });
         products = new ArrayList<Product>();
         productsAdapter = new ProductsAdapter(this, products);
         listProducts.setAdapter(productsAdapter);

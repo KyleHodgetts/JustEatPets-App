@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductsActivity" />
-        <activity android:name=".RecognitionActivity" >
-        </activity>
+        <activity android:name=".RecognitionActivity" />
+        <activity android:name=".ProductActivity" />
     </application>
 
 </manifest>

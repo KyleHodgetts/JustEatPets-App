@@ -36,7 +36,8 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
         productPrice.setText(Double.toString(product.getPrice()));
 
         TextView productRestaurant = (TextView) productRow.findViewById(R.id.txtProductRestaurant);
-        productRestaurant.setText(product.getRestaurant().getName());
+        // TODO productRestaurant.setText(product.getRestaurant().getName());
+        productRestaurant.setText("RESTAURANT");
 
         return productRow;
     }

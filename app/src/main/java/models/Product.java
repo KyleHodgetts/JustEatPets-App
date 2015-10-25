@@ -8,10 +8,11 @@ public class Product {
     private String name;
     private Double price;
     private Pet pet;
-    private Restaurant restaurant;
     private String photoURL;
+    private int restaurantId;
+    private Restaurant restaurant;
 
-    public Product(int id, String name, Double price, String pet, Restaurant restaurant, String photoURL) {
+    public Product(int id, String name, Double price, String pet, int restaurantId, String photoURL) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -22,7 +23,7 @@ public class Product {
         } else {
             this.pet = Pet.FISH;
         }
-        this.restaurant = restaurant;
+        this.restaurantId = restaurantId;
         this.photoURL = photoURL;
     }
 

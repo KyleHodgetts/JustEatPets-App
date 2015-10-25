@@ -1,4 +1,4 @@
-== JustEatPets App
+# JustEatPets App
 
 This Android app had a backend written in Rails, for which the source code is [here](http://github.com/fareskalaboud/JustEatPets-API).
 

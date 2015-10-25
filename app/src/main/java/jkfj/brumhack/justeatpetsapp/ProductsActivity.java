@@ -45,6 +45,7 @@ public class ProductsActivity extends Activity {
                 Intent i = new Intent(ProductsActivity.this, ProductActivity.class);
                 i.putExtra(PRODUCT + "name", p.getName());
                 i.putExtra(PRODUCT + "price", p.getPrice());
+                i.putExtra(PRODUCT + "image", p.getPhotoURL());
                 i.putExtra(PRODUCT + "restaurant", "Restaurant X");
                 startActivity(i);
             }

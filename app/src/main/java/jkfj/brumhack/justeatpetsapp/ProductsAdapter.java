@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +31,7 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
     private LayoutInflater inflater;
     private View productRow;
     private Product product;
+    private ImageView productImage;
     private TextView productName;
     private TextView productPrice;
     private TextView productRestaurant;
@@ -44,7 +48,8 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
 
         product = getItem(position);
 
-        //TODO convert image URL to put in image view
+        productImage = (ImageView) productRow.findViewById(R.id.imgProduct);
+        Picasso.with(getContext()).load(product.getPhotoURL()).into(productImage);
 
         productName = (TextView) productRow.findViewById(R.id.txtProductName);
         productName.setText(product.getName());

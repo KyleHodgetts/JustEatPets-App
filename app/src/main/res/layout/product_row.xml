@@ -32,9 +32,9 @@
         android:textSize="@dimen/priceSize"
         android:textAlignment="viewEnd"
         android:layout_marginRight="@dimen/standardMargin"
-        android:layout_alignTop="@+id/txtProductName"
+        android:text="TEST"
+        android:layout_below="@+id/txtProductName"
         android:layout_alignParentEnd="true" />
-
 
     <TextView
         android:id="@+id/txtProductRestaurant"

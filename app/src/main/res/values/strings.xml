@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JustEatPetsApp</string>
+    <string name="shootPet">Shoot Pet</string>
+    <string name="appInstructions">
+    </string>
+    <string name="logo">Logo</string>
 </resources>

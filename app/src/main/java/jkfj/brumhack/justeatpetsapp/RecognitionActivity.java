@@ -24,17 +24,11 @@ import java.io.ByteArrayOutputStream;
  * A simple Activity that performs recognition using the Clarifai API.
  */
 public class RecognitionActivity extends Activity {
-    private static final String TAG = "RECOGNITIONACTIVITY";
-    public static final String FILTER = "filter";
-
-    // IMPORTANT NOTE: you should replace these keys with your own App ID and secret.
-    // These can be obtained at https://developer.clarifai.com/applications
+    private static final String TAG = "Recognition_Activty";
+    private static final String FILTER = "filter";
     private static final String APP_ID = Credentials.APP_ID;
     private static final String APP_SECRET = Credentials.APP_SECRET;
-    //shouldn't really commit these. Oops
-
     private static final int REQUEST_IMAGE_CAPTURE = 1;
-
     private final ClarifaiClient client = new ClarifaiClient(APP_ID, APP_SECRET);
     private ImageView imageView;
 
@@ -55,9 +49,10 @@ public class RecognitionActivity extends Activity {
 
     /**
      * Receives the image from the photo activity, and performs all relevant tasks
+     *
      * @param requestCode something
-     * @param resultCode something else
-     * @param data the image data, within an intent
+     * @param resultCode  something else
+     * @param data        the image data, within an intent
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -68,12 +63,6 @@ public class RecognitionActivity extends Activity {
             if (bitmap != null) {
 
                 //set the image view with the picture that shows whilst the image is being processed.
-//                try {
-//                    Bitmap scaled = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight() * bitmap.getHeight() / bitmap.getWidth(), true);
-//                }
-//                catch (Exception e) {
-//                    Log.i(TAG, e.getMessage());
-//                }
                 imageView.setImageBitmap(bitmap);
 
                 // Run recognition on a background thread since it makes a network call.
@@ -92,9 +81,7 @@ public class RecognitionActivity extends Activity {
                 Log.i(TAG, "Unable to load image");
                 this.finish();
             }
-        }
-
-        else {
+        } else {
             this.finish();
         }
     }
@@ -115,9 +102,11 @@ public class RecognitionActivity extends Activity {
             byte[] jpeg = out.toByteArray();
 
             // Send the JPEG to Clarifai and return the result.
+            Log.i(TAG, "Waiting for clarifai");
             return client.recognize(new RecognitionRequest(jpeg)).get(0);
         } catch (ClarifaiException e) {
             Log.e(TAG, "Clarifai error", e);
+            e.printStackTrace();
             this.finish();
             return null;
         }
@@ -126,32 +115,32 @@ public class RecognitionActivity extends Activity {
 
     /**
      * Gets the first animal tag from Clarifai, and starts the food list activity with that filter.
-     * @param result
+     *
+     * @param result result that clarifai returned
      */
     private void filterTagsToGetPet(RecognitionResult result) {
         String animalFilter = "dog"; //everyone likes dogs, not sure of behaviour if I make this blank
 
         //if given result is ok, filter tags to get animal
         if (result != null && result.getStatusCode() == RecognitionResult.StatusCode.OK) {
+            label:
             for (Tag tag : result.getTags()) {
 
                 //gets first tag that matches
                 String tagName = tag.getName();
-                if (tagName.equals("cat")) {
-                    animalFilter = "Cat";
-                    break;
-                } else if (tagName.equals("dog")) {
-                    animalFilter = "Dog";
-                    break;
-                } else if (tagName.equals("fish")) {
-                    animalFilter = "Fish";
-                    break;
+                switch (tagName) {
+                    case "cat":
+                        animalFilter = "Cat";
+                        break label;
+                    case "dog":
+                        animalFilter = "Dog";
+                        break label;
+                    case "fish":
+                        animalFilter = "Fish";
+                        break label;
                 }
             }
-
-//            Log.i(TAG, "Animal filter is : " + animalFilter);
-
-            toastAnimalFilter(animalFilter);
+            toast(animalFilter);
 
             //send intent to the food api business
             Intent i = new Intent(RecognitionActivity.this, ProductsActivity.class);
@@ -163,13 +152,12 @@ public class RecognitionActivity extends Activity {
 
     /**
      * Tells the user what animal was selected, via a toast
-     * @param animalFilter the animal chosen
+     *
+     * @param text the animal chosen
      */
-    private void toastAnimalFilter(String animalFilter) {
+    private void toast(String text) {
         Context context = getApplicationContext();
-        CharSequence text = animalFilter;
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }

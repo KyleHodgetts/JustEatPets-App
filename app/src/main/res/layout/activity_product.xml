@@ -1,45 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/standardMargin">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtProductName"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/layoutProductInfo"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/standardMargin"
-        android:textAlignment="center"
-        android:text="Name of product"
-        android:textSize="25sp"
-        />
+        android:layout_margin="@dimen/standardMargin">
 
-    <ImageView
-        android:id="@+id/imgProduct"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_margin="@dimen/standardMargin"
-        android:background="@drawable/dog"
-        android:layout_gravity="center_horizontal" />
+        <TextView
+            android:id="@+id/txtProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standardMargin"
+            android:textAlignment="center"
+            android:text="Name of product"
+            android:textSize="25sp"
+            />
 
-    <TextView
-        android:id="@+id/txtProductPrice"
+        <ImageView
+            android:id="@+id/imgProduct"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="@dimen/standardMargin"
+            android:background="@drawable/dog"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/txtProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standardMargin"
+            android:textSize="20sp"
+            android:text="€1.50"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/txtProductRestaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Restaurant X"
+            android:layout_marginLeft="@dimen/standardMargin"
+            android:layout_marginRight="@dimen/standardMargin"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/standardMargin"
-        android:textSize="20sp"
-        android:text="€1.50"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/btnAddToCart"
+        android:background="@drawable/shoppingcart"
+        android:layout_below="@+id/layoutProductInfo"
+        android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/txtProductRestaurant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Restaurant X"
-        android:layout_marginLeft="@dimen/standardMargin"
-        android:layout_marginRight="@dimen/standardMargin"
-        android:layout_gravity="center_horizontal" />
-
-</LinearLayout>
+</RelativeLayout>

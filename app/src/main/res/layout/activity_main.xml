@@ -12,21 +12,41 @@
         android:layout_height="wrap_content"
         android:background="@drawable/logo"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copyright?! What copyright?"
+        android:layout_marginTop="@dimen/standardMargin"
+        android:textSize="25sp"
+        android:layout_below="@+id/btnLogo"
+        android:layout_centerHorizontal="true" />
+
     <ImageButton
         android:id="@+id/btnShootPets"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/shootpets"
-        android:layout_centerVertical="true"
         android:scaleType="fitXY"
-        android:layout_alignParentStart="true"
-        android:onClick="startShootPetsActivity" />
+        android:onClick="startShootPetsActivity"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:id="@+id/btnShoppingCart"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/standardMargin"
+        android:layout_marginBottom="@dimen/standardMargin"
+        android:background="@drawable/shoppingcartbutton"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/relativeLayout">
 
         <ImageButton
             android:id="@+id/btnCat"
